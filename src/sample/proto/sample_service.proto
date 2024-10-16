@@ -1,0 +1,44 @@
+/* https://protobuf.dev/programming-guides/style/ for style conventions */
+
+syntax = "proto3";
+
+package sampleservice;
+
+
+service SampleService {
+    rpc GetHello (GetHelloRequest) returns (GetHelloResponse){}
+    rpc AddName (AddNameRequest) returns (AddNameResponse){}
+    rpc PrintNames (PrintNamesRequest) returns (PrintNamesResponse){}
+    rpc UploadFile (stream UploadFileRequest) returns (UploadFileResponse){}
+}
+
+message GetHelloRequest { }
+
+message GetHelloResponse{
+    string message = 1;
+}
+
+message AddNameRequest{
+    string name = 1;
+}
+
+message AddNameResponse{
+    string message = 1;
+}
+
+message PrintNamesRequest{
+    int32 size = 1;
+    string name_filter = 2;
+}
+
+message PrintNamesResponse{
+    repeated string names = 1;
+}
+
+message UploadFileRequest{
+    string file_name = 1;    
+}
+
+message UploadFileResponse{
+    string message = 1;
+}
