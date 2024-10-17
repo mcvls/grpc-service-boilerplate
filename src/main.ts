@@ -12,7 +12,7 @@ async function bootstrap() {
     transport: Transport.GRPC,
     options: {
       package: SAMPLESERVICE_PACKAGE_NAME,
-      protoPath: join(__dirname, './sample/proto/sample_service.proto'),
+      protoPath: join(__dirname, './proto/sample-service/sample_service.proto'),
       url: `0.0.0.0:${process.env.PORT}`,
       gracefulShutdown: true,
       onLoadPackageDefinition: (pkg, server) => {
