@@ -11,7 +11,7 @@ import {
   SampleServiceControllerMethods,
   UploadFileRequest,
   UploadFileResponse,
-} from './sample-service.inteface';
+} from './sample-service-v1.inteface';
 import GetHelloUseCase from './use-cases/get-hello.use-case';
 import AddNameUseCase from './use-cases/add-name.use-case';
 import PrintNamesUseCase from './use-cases/print-names.use-case';
