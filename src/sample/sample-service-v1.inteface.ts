@@ -10,7 +10,7 @@ import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
 import { IsNotEmpty, Matches, Min } from 'class-validator';
 import { Observable } from 'rxjs';
 
-export const protobufPackage = 'sampleservice';
+export const protobufPackage = 'sample_service.v1';
 
 export interface GetHelloRequest {}
 
@@ -48,29 +48,7 @@ export interface UploadFileResponse {
   message: string;
 }
 
-export const SAMPLESERVICE_PACKAGE_NAME = 'sampleservice';
-
-export interface SampleServiceClient {
-  getHello(
-    request: GetHelloRequest,
-    metadata?: Metadata,
-  ): Observable<GetHelloResponse>;
-
-  addName(
-    request: AddNameRequest,
-    metadata?: Metadata,
-  ): Observable<AddNameResponse>;
-
-  printNames(
-    request: PrintNamesRequest,
-    metadata?: Metadata,
-  ): Observable<PrintNamesResponse>;
-
-  uploadFile(
-    request: Observable<UploadFileRequest>,
-    metadata?: Metadata,
-  ): Observable<UploadFileResponse>;
-}
+export const SAMPLE_SERVICE_V1_PACKAGE_NAME = 'sample_service.v1';
 
 export interface SampleServiceController {
   getHello(
@@ -131,5 +109,3 @@ export function SampleServiceControllerMethods() {
     }
   };
 }
-
-export const SAMPLE_SERVICE_NAME = 'SampleService';
