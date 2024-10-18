@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { GetHelloResponse } from '../sample-service.inteface';
+import { GetHelloResponse } from '../sample-service-v1.inteface';
 
 @Injectable()
 export default class GetHelloUseCase {

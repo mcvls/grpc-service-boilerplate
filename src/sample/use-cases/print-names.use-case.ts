@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrintNamesResponse } from '../sample-service.inteface';
+import { PrintNamesResponse } from '../sample-service-v1.inteface';
 import { SampleRepository } from '../sample.repostory';
 
 @Injectable()

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { status } from '@grpc/grpc-js';
 import { AppRpcException } from 'src/common/exceptions/app-rpc.exception';
 import { SampleRepository } from '../sample.repostory';
-import { AddNameResponse } from '../sample-service.inteface';
+import { AddNameResponse } from '../sample-service-v1.inteface';
 
 @Injectable()
 export default class AddNameUseCase {

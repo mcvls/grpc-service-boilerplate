@@ -9,6 +9,7 @@ import { EncryptionHelper } from './common/helpers/encryption.helper';
 import { HelperModule } from './common/helpers/helper.module';
 import { AppExceptionFilter } from './common/filters/app-exception.filter';
 import { ContextModule } from './common/context/context.module';
+import { HealthModule } from './common/health/health.module';
 import { ServiceModule } from './service/service.module';
 import { SampleModule } from './sample/sample.module';
 
@@ -90,6 +91,7 @@ const configValidationSchema = joi.object({
     */
     ContextModule,
     LoggerModule,
+    HealthModule,
     ServiceModule,
     SampleModule,
   ],
@@ -98,10 +100,6 @@ const configValidationSchema = joi.object({
       provide: APP_FILTER,
       useClass: AppExceptionFilter,
     },
-    /* {
-      provide: APP_FILTER,
-      useClass: ValidationPipeExceptionFilter,
-    }, */
     {
       provide: APP_INTERCEPTOR,
       useClass: CorrelationInterceptor,
