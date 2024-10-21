@@ -10,7 +10,7 @@ import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
 import { IsNotEmpty, Matches, Min } from 'class-validator';
 import { Observable } from 'rxjs';
 
-export const protobufPackage = 'sample_service.v1';
+export const protobufPackage = 'sample.v1';
 
 export interface GetHelloRequest {}
 
@@ -48,7 +48,7 @@ export interface UploadFileResponse {
   message: string;
 }
 
-export const SAMPLE_SERVICE_V1_PACKAGE_NAME = 'sample_service.v1';
+export const SAMPLE_V1_PACKAGE_NAME = 'sample.v1';
 
 export interface SampleServiceController {
   getHello(
