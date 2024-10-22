@@ -6,11 +6,7 @@
     "deleteOutDir": true,
     "assets": [
       {
-        "include": "../common-proto/health.proto",
-        "outDir": "./dist/proto/"
-      },
-      {
-        "include": "../common-proto/sample_service/**/*.proto",
+        "include": "../proto/**/*.proto",
         "outDir": "./dist/proto/"
       }
     ],
