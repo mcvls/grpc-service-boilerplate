@@ -2,3 +2,5 @@
 	path = common-proto
 	url = https://github.com/mcvls/common-proto.git
 	branch = main
+	update = merge
+
