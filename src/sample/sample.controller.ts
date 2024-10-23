@@ -7,6 +7,8 @@ import {
   GetHelloResponse,
   PrintNamesRequest,
   PrintNamesResponse,
+  ProduceEventRequest,
+  ProduceEventResponse,
   SampleServiceController,
   SampleServiceControllerMethods,
   UploadFileRequest,
@@ -15,7 +17,9 @@ import {
 import GetHelloUseCase from './use-cases/get-hello.use-case';
 import AddNameUseCase from './use-cases/add-name.use-case';
 import PrintNamesUseCase from './use-cases/print-names.use-case';
+import ProduceEventUseCase from './use-cases/produce-event.use-case';
 import { RpcValidationPipe } from 'src/common/pipes/rpc-validation.pipe';
+import { Metadata } from '@grpc/grpc-js';
 
 @Controller()
 @SampleServiceControllerMethods()
@@ -24,6 +28,7 @@ export class SampleController implements SampleServiceController {
     private getHelloUseCase: GetHelloUseCase,
     private addNameUseCase: AddNameUseCase,
     private printNamesUseCase: PrintNamesUseCase,
+    private produceEventUseCase: ProduceEventUseCase,
   ) {}
 
   async getHello(): Promise<GetHelloResponse> {
@@ -41,6 +46,12 @@ export class SampleController implements SampleServiceController {
       request.size,
       request.nameFilter,
     );
+  }
+
+  async produceEvent(
+    request: ProduceEventRequest,
+  ): Promise<ProduceEventResponse> {
+    return await this.produceEventUseCase.execute(request.message);
   }
 
   async uploadFile(

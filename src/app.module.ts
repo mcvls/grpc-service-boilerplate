@@ -1,15 +1,16 @@
 import { Logger, Module, OnApplicationShutdown } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import * as joi from 'joi';
-import { CorrelationInterceptor } from './common/interceptors/correlation.interceptor';
 import { LoggerModule } from './common/loggers/logger.module';
-import { CacheModule } from './common/providers/cache/cache.module';
-import { EncryptionHelper } from './common/helpers/encryption.helper';
 import { HelperModule } from './common/helpers/helper.module';
-import { AppExceptionFilter } from './common/filters/app-exception.filter';
+import { EncryptionHelper } from './common/helpers/encryption.helper';
 import { ContextModule } from './common/context/context.module';
 import { HealthModule } from './common/health/health.module';
+import { CorrelationInterceptor } from './common/interceptors/correlation.interceptor';
+import { AppExceptionFilter } from './common/filters/app-exception.filter';
+import { CacheModule } from './common/providers/cache/cache.module';
+import { KafkaModule } from './common/providers/kafka/kafka.module';
 import { ServiceModule } from './service/service.module';
 import { SampleModule } from './sample/sample.module';
 
@@ -43,6 +44,19 @@ const configValidationSchema = joi.object({
         username: encrpytionHelper.decrypt(configService.get('REDIS_USER')),
         password: encrpytionHelper.decrypt(configService.get('REDIS_PASSWORD')),
         db: configService.get('REDIS_DB'),
+      }),
+    }),
+    KafkaModule.forRootAsync({
+      imports: [ConfigModule, HelperModule],
+      inject: [ConfigService, EncryptionHelper],
+      useFactory: async (
+        configService: ConfigService,
+        encrpytionHelper: EncryptionHelper,
+      ) => ({
+        clientId: configService.get('KAFKA_CLIENT_ID'),
+        brokers: configService.get('KAFKA_BROKERS').split(','),
+        username: configService.get('KAFKA_USER'),
+        password: configService.get('KAFKA_PASSWORD'),
       }),
     }),
     /* 
