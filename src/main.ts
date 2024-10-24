@@ -5,7 +5,7 @@ import { ReflectionService } from '@grpc/reflection';
 import { join } from 'path';
 import { CustomLoggerService } from './common/loggers/custom-logger.service';
 import { AppModule } from './app.module';
-import { HEALTH_PACKAGE_NAME } from './common/health/health.inteface';
+import { HEALTH_PACKAGE_NAME } from './common/health/health.interface';
 import { SAMPLE_V1_PACKAGE_NAME } from './sample/sample-service-v1.inteface';
 
 async function bootstrap() {

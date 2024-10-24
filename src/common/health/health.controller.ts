@@ -4,7 +4,7 @@ import {
   HealthCheckRequest,
   HealthCheckResposne,
   ServingStatus,
-} from './health.inteface';
+} from './health.interface';
 
 @Controller()
 export class HealthController {

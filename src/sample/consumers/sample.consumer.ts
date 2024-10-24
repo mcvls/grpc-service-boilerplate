@@ -7,10 +7,10 @@ export default class SampleConsumer implements OnApplicationBootstrap {
   constructor(private kafkaConsumerService: KafkaConsumerService) {}
 
   async onApplicationBootstrap() {
-    await this.kafkaConsumerService.consume(
+    /*await this.kafkaConsumerService.consume(
       { topics: ['test_topic_001'] },
       { eachMessage: this.handleMessage },
-    );
+    );*/
   }
 
   handleMessage = async ({
