@@ -7,6 +7,7 @@ import { CustomLoggerService } from './common/loggers/custom-logger.service';
 import { AppModule } from './app.module';
 import { HEALTH_PACKAGE_NAME } from './common/health/health.interface';
 import { SAMPLE_V1_PACKAGE_NAME } from './sample/sample-service-v1.inteface';
+import { EncryptionHelper } from './common/helpers/encryption.helper';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<GrpcOptions>(AppModule, {
@@ -28,5 +29,9 @@ async function bootstrap() {
   await app.listen();
   app.useLogger(app.get(CustomLoggerService));
   Logger.log(`Running on port: ${process.env.PORT}`);
+  //const encryptionHelper = app.get(EncryptionHelper);
+  //encryptionHelper.encryptEnv();
+  //encryptionHelper.decryptEnv();
 }
+
 bootstrap();
