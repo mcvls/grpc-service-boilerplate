@@ -1,0 +1,60 @@
+#This is a local k8 cluster test with local image built
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-service-deployment
+  namespace: default
+  labels:
+    app: grpc-service-app
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: grpc-service-app
+  template:
+    metadata:
+      labels:
+        app: grpc-service-app
+      annotations:
+        kubectl.kubernetes.io/default-container: grpc-service-app-container
+        linkerd.io/inject: enabled
+    spec:
+      containers:
+        - name: grpc-service-app-container
+          image: grpc-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 50051
+          livenessProbe:
+            grpc:
+              port: 50051
+            initialDelaySeconds: 5
+          readinessProbe:
+            grpc:
+              port: 50051
+            initialDelaySeconds: 5
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-service
+  namespace: default
+  labels:
+    type: grpc
+spec:
+  selector:
+    app: grpc-service-app
+  ports:
+    - protocol: TCP
+      port: 50051
+      targetPort: 50051

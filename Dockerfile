@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY ./src ./src
 
+COPY ./common-proto ./common-proto
+
 COPY package*.json tsconfig*.json nest-cli*.json ./
 
 RUN npm install
@@ -25,10 +27,8 @@ RUN chown node:node ./
 
 USER node
 
-ENV PORT=50050
+ENV PORT=50051
 
-EXPOSE 50050
+EXPOSE 50051
 
-ENTRYPOINT ["node"]
-
-CMD ["./dist/main"]
+ENTRYPOINT ["node","./dist/main"]

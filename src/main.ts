@@ -24,10 +24,12 @@ async function bootstrap() {
         new ReflectionService(pkg).addToServer(server);
       },
     },
+    bufferLogs: true,
   });
+  app.useLogger(app.get(CustomLoggerService));
   app.enableShutdownHooks();
   await app.listen();
-  app.useLogger(app.get(CustomLoggerService));
+
   Logger.log(`Running on port: ${process.env.PORT}`);
   //const encryptionHelper = app.get(EncryptionHelper);
   //encryptionHelper.encryptEnv();

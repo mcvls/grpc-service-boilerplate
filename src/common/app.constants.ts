@@ -1,3 +1,3 @@
 export const EventTopic = {
-  TEST: 'test_topic_001',
+  TEST_GRPC_PRODUCE_TOPIC: 'test_grpc_produce_topic',
 };

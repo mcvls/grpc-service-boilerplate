@@ -20,8 +20,7 @@ const configValidationSchema = joi.object({
     .valid('development', 'test', 'sandbox', 'live')
     .required(),
   PORT: joi.number().required().default(50050),
-  LOG_DIR: joi.string().required(),
-  LOG_FILENAME: joi.string().required(),
+  APP_NAME: joi.string().required(),
 });
 
 @Module({
@@ -55,8 +54,8 @@ const configValidationSchema = joi.object({
       ) => ({
         clientId: configService.get('KAFKA_CLIENT_ID'),
         brokers: configService.get('KAFKA_BROKERS').split(','),
-        username: configService.get('KAFKA_USER'),
-        password: configService.get('KAFKA_PASSWORD'),
+        username: encrpytionHelper.decrypt(configService.get('KAFKA_USER')),
+        password: encrpytionHelper.decrypt(configService.get('KAFKA_PASSWORD')),
       }),
     }),
     /* 

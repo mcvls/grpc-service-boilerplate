@@ -9,7 +9,7 @@ export default class ProduceEventUseCase {
 
   async execute(message: string): Promise<ProduceEventResponse> {
     await this.kafkaProducerService.send({
-      topic: EventTopic.TEST,
+      topic: EventTopic.TEST_GRPC_PRODUCE_TOPIC,
       messages: [{ value: message }],
     });
     return { message: 'Event message sent succesfully' };

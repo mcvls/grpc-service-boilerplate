@@ -11,21 +11,26 @@ export class AppExceptionFilter implements ExceptionFilter {
     let throwable: any;
     if (exception instanceof AppRpcException) {
       const appException = exception as AppRpcException;
-      if (appException.sendToLog) Logger.error(exception);
+      if (appException.sendToLog)
+        Logger.error(
+          exception.internalMessage,
+          undefined,
+          exception.stack.toString(),
+        );
       untrustedException = !appException.isOperational;
       throwable = {
         code: exception.status,
         message: exception.externalMessage,
       };
     } else if (exception instanceof RpcException) {
-      Logger.error(exception);
+      Logger.error(exception.message, undefined, exception.stack.toString());
       exception = exception as any;
       throwable = {
         code: exception.error?.code ?? status.UNKNOWN,
         message: exception.error?.message,
       };
     } else {
-      Logger.error(exception);
+      Logger.error(exception.message, undefined, exception.stack.toString());
       throwable = {
         code: status.INTERNAL,
         message: 'Unexpected error occurred',
